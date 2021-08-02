@@ -36,7 +36,7 @@ sudo chmod +x odoo_install.sh
 ##### 4. Execute the script:
 ```
 sudo ./odoo_install.sh
-python3 odoo-bin --addons_path=/odoo/enterprise/addons,/odoo/odoo-server/addons
+python3 odoo-bin --addons-path=/odoo/enterprise/addons,/odoo/odoo-server/addons
 ```
 
 ## Where should I host Odoo?
