@@ -109,7 +109,7 @@ sudo adduser --system --quiet --shell=/bin/bash --home=$OE_HOME --gecos 'ODOO' -
 #The user should also be added to the sudo'ers group.
 sudo adduser $OE_USER sudo
 #Enabling External Access for Your odoo User
-sudo rsync --archive --chown=$OE_USER:$OE_USER ~/.ssh /home/$OE_USER
+# sudo rsync --archive --chown=$OE_USER:$OE_USER ~/.ssh /home/$OE_USER
 
 
 echo -e "\n---- Create Log directory ----"
@@ -329,7 +329,7 @@ if [ $INSTALL_NGINX = "True" ]; then
   location / {
   proxy_pass    http://127.0.0.1:$OE_PORT;
   # by default, do not forward anything
-  proxy_redirect off;
+  #proxy_redirect off;
   }
 
   location /longpolling {
