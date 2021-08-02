@@ -329,7 +329,7 @@ if [ $INSTALL_NGINX = "True" ]; then
   location / {
   proxy_pass    http://127.0.0.1:$OE_PORT;
   # by default, do not forward anything
-  #proxy_redirect off;
+  # proxy_redirect off;
   }
 
   location /longpolling {
