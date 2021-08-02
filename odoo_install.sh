@@ -49,8 +49,10 @@ ADMIN_EMAIL="hamdyabdelrahman200@gmail.com"
 ## https://github.com/odoo/odoo/wiki/Wkhtmltopdf ):
 ## https://www.odoo.com/documentation/13.0/setup/install.html#debian-ubuntu
 
+echo -e "\n-----Install wkhtmltopdf----------"
 WKHTMLTOX_X64=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.trusty_amd64.deb
 WKHTMLTOX_X32=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.trusty_i386.deb
+
 #--------------------------------------------------
 # Update Server
 #--------------------------------------------------
@@ -62,6 +64,14 @@ sudo add-apt-repository "deb http://mirrors.kernel.org/ubuntu/ xenial main"
 sudo apt-get update
 sudo apt-get upgrade -y
 
+#-------------------------------------------------
+# Setting Up a Basic Firewall
+#-------------------------------------------------
+echo -e "\n---- Setting Up a Basic Firewall-----"
+sudo ufw app list
+sudo ufw allow OpenSSH
+sudo ufw enable
+sudo ufw status
 
 #--------------------------------------------------
 # Install PostgreSQL Server
@@ -76,10 +86,19 @@ sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
 # Install Dependencies
 #--------------------------------------------------
 echo -e "\n--- Installing Python 3 + pip3 --"
-sudo apt-get install git python3 python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libpng12-0 libjpeg-dev gdebi -y
+sudo apt-get install git python3 python3-pip build-essential wget python3-dev \
+    python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev \
+    python3-setuptools node-less libpng12-0 libjpeg-dev gdebi -y
+
+echo -e "\n---development tools and native dependencies-----"
+sudo apt install libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev \
+    libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev libfreetype6-dev \
+    liblcms2-dev libwebp-dev libharfbuzz-dev libfribidi-dev libxcb1-dev libpq-dev
 
 echo -e "\n---- Install python packages/requirements ----"
+pip3 install setuptools wheel
 sudo -H pip3 install -r https://github.com/odoo/odoo/raw/${OE_VERSION}/requirements.txt
+
 
 echo -e "\n---- Installing nodeJS NPM and rtlcss for LTR support ----"
 sudo apt-get install nodejs npm -y
